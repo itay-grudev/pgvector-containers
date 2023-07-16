@@ -9,9 +9,13 @@ These images are built on top of the [Official Postgres image](https://hub.docke
 maintained by the [PostgreSQL Docker Community](https://github.com/docker-library/postgres),
 by adding the following software:
 
+- [pgvector](https://github.com/pgvector/pgvector)
 - Barman Cloud
 - PGAudit
 - Postgres Failover Slots
+
+pgvector is distributed under the
+[PostgreSQL License](https://github.com/pgvector/pgvector/blob/master/LICENSE).
 
 Barman Cloud is distributed by EnterpriseDB under the
 [GNU GPL 3 License](https://github.com/EnterpriseDB/barman/blob/master/LICENSE).
@@ -36,4 +40,3 @@ Copyright The CloudNativePG Contributors.
 *[Postgres, PostgreSQL and the Slonik Logo](https://www.postgresql.org/about/policies/trademarks/)
 are trademarks or registered trademarks of the PostgreSQL Community Association
 of Canada, and used with their permission.*
-

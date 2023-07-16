@@ -26,6 +26,25 @@ LABEL name="PostgreSQL Container Images" \
 
 COPY requirements.txt /
 
+# Install pgvector
+ARG PGVECTOR_VERSION=0.4.4
+ARG PGVECTOR_REVISION=1982121694f7b4eeb206ee6d8dcd03b8b1316f13
+
+RUN apt-get update && \
+	apt-get install -y --no-install-recommends git ca-certificates build-essential postgresql-server-dev-${PG_MAJOR} && \
+	git clone --branch v${PGVECTOR_VERSION} --depth 1 https://github.com/pgvector/pgvector.git /tmp/pgvector && \
+	cd /tmp/pgvector && \
+	git reset --hard ${PGVECTOR_REVISION} && \
+	make clean && \
+	make OPTFLAGS="" && \
+	make install && \
+	mkdir /usr/share/doc/pgvector && \
+	cp LICENSE README.md /usr/share/doc/pgvector && \
+	rm -r /tmp/pgvector && \
+	apt-get remove -y git ca-certificates build-essential postgresql-server-dev-${PG_MAJOR} && \
+	apt-get autoremove -y && \
+	rm -rf /var/lib/apt/lists/*
+
 # Install barman-cloud
 RUN set -xe; \
 	apt-get update; \
